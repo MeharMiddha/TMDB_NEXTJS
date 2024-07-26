@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.background-bottom-right {
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-position-y: top;
+  background-size: cover;
+}
