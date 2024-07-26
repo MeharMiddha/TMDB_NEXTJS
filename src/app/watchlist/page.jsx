@@ -5,7 +5,6 @@ import ListCard from "@/card/ListCard";
 
 function Watchlist() {
   const { watchlist } = useContext(UserContext);
-  document.title = "Watchlist";
   return (
     <div className="h-[100%] min-h-[700px]">
       <p className="text-[40px] justify-center flex font-bold m-2 xl:p-4">

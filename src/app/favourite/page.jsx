@@ -5,7 +5,6 @@ import { UserContext } from "@/context/UserContext";
 
 function Favourites() {
   const { favourites } = useContext(UserContext);
-  document.title = "Favourites";
   return (
     <div className="h-[100%] min-h-[700px]">
       <p className="text-[40px] justify-center flex font-bold m-2 xl:p-4">
