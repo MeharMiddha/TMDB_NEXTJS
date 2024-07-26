@@ -1,26 +1,33 @@
 "use client";
 import React, { useState, createContext, useEffect } from "react";
-
 const UserContext = createContext();
-
+function getFromLocalStorage(key) {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem(key);
+  }
+}
+function setInLocalStorage(key, value) {
+  if (typeof window !== 'undefined') {
+    return localStorage.setItem(key, value);
+  }
+}
 const ContextProvider = ({ children }) => {
   const [favourites, setFavourites] = useState(() => {
-    const storedFavourites = localStorage.getItem("favourites");
+    const storedFavourites = getFromLocalStorage("favourites");
     return storedFavourites ? JSON.parse(storedFavourites) : [];
   });
   const [watchlist, setWatchlist] = useState(() => {
-    const storedWatchlist = localStorage.getItem("watchlist");
+    const storedWatchlist = getFromLocalStorage("watchlist");
     return storedWatchlist ? JSON.parse(storedWatchlist) : [];
   });
   useEffect(() => {
-    localStorage.setItem("favourites", JSON.stringify(favourites));
+    setInLocalStorage("favourites", JSON.stringify(favourites));
   }, [favourites]);
   useEffect(() => {
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    setInLocalStorage("watchlist", JSON.stringify(watchlist));
   }, [watchlist]);
   const addToFavourites = (item) => {
     setFavourites([...favourites, item]);
-    
   };
   const removeFromFavourites = (item) => {
     setFavourites(favourites.filter((i) => i.id !== item.id));
@@ -32,11 +39,11 @@ const ContextProvider = ({ children }) => {
     setWatchlist(watchlist.filter((i) => i.id !== item.id));
   };
   const [data, setData] = useState(() => {
-    const storedData = localStorage.getItem("userData");
+    const storedData = getFromLocalStorage("userData");
     return storedData ? JSON.parse(storedData) : { username: "", password: "" };
   });
   useEffect(() => {
-    localStorage.setItem("userData", JSON.stringify(data));
+    setInLocalStorage("userData", JSON.stringify(data));
   }, [data]);
   return (
     <UserContext.Provider
@@ -57,5 +64,4 @@ const ContextProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
-
 export { UserContext, ContextProvider };
