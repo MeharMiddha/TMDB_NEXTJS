@@ -34,8 +34,8 @@ function StarCrew({ movies }) {
         <p className="text-[20px] font-semibold">Crew</p>
         <div className="flex w-full overflow-x-auto gap-4">
           {starcast &&
-            starcast.map((actor) => (
-              <Link href={`/Biography/${actor?.id}`} key={actor.id}>
+            starcast.map((actor,id) => (
+              <Link href={`/Biography/${actor?.id}`} key={id}>
                   <StarCard
                     name={actor.name}
                     character={actor.department}
